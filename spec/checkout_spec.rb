@@ -7,14 +7,15 @@ describe Shop do
     @shop = Shop.new(prices)
   end
 
-  it 'initialize with prices' do
+  it 'initializes with prices' do
 
     expect(@shop.prices.size).to eq 4
   end
 
   describe '#checkout' do
-    context 'sums without special offer' do
-      it 'when given one item it returns its prices' do
+    context 'sums prices without special offer' do
+
+      it 'when given one item it returns its price' do
 
         expect(@shop.checkout("A")).to eq 50
       end
@@ -30,19 +31,25 @@ describe Shop do
       end
     end
     context 'special offer' do
-      it 'when given thre items it returns sum of its prices -special offer' do
+
+      it 'when given three items it returns sum of its prices - special offer' do
 
         expect(@shop.checkout("AAA")).to eq 130
       end
 
-      it 'when given thre items it returns sum of its prices -special offer' do
+      it 'when given items on offer x2 it returns sum of its prices -special offer' do
 
         expect(@shop.checkout("AAAAAA")).to eq 260
       end
 
-      it 'when given thre items it returns sum of its prices -special offer' do
+      it 'when given items on differnt offer it returns sum of its prices -special offer' do
 
         expect(@shop.checkout("BB")).to eq 45
+      end
+
+      it 'calculate price correctly with all discounts' do
+
+        expect(@shop.checkout("AABAABAABBAB")).to eq 430
       end
     end
 
